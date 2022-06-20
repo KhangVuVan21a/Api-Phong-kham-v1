@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeWork {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="time",nullable = false)
 	private LocalDate time;

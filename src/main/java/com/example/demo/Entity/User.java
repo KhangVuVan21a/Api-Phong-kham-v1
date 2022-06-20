@@ -28,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="username",nullable = false)
 	private String username;
@@ -46,8 +46,6 @@ public class User {
 	private String address;
 	@Column(name="phone_number")
 	private String phoneNumber;
-	@Column(name="department_id")
-	private int departmentId;
 	@CreatedDate
 	@Column(name="create_at")
 	private LocalDateTime createAt;

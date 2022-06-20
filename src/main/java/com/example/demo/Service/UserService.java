@@ -15,5 +15,6 @@ public interface UserService {
 	boolean isCheckUserName(String userName);
 	UserDto updateUser(UserDto userDto);
 	List<UserDto> getAllUser();
+	UserDto findUserByUserName(String userName);
 	
 }

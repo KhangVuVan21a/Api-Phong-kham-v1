@@ -28,7 +28,7 @@ import net.bytebuddy.utility.nullability.MaybeNull;
 @NoArgsConstructor
 public class Heath {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="title",nullable = false)

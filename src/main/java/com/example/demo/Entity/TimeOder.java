@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeOder {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
