@@ -16,5 +16,6 @@ public interface UserService {
 	UserDto updateUser(UserDto userDto);
 	List<UserDto> getAllUser();
 	UserDto findUserByUserName(String userName);
+	List<UserDto> getAllUserByLevel(int level);
 	
 }

@@ -13,8 +13,5 @@ public class HeathDto {
 	private int id;
 	private String title;
 	private String detail;
-	private TimeOder timeOder;
-	private User user;
-	private Department department;
 	private LocalDate updateAt;
 }
