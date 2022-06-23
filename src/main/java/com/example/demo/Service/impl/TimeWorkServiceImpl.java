@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.MapperDto;
 import com.example.demo.Dto.TimeWorkDto;
@@ -13,7 +14,7 @@ import com.example.demo.Entity.TimeWork;
 import com.example.demo.ModelMapper.TimeWorkMapper;
 import com.example.demo.Repository.TimeWorkRepository;
 import com.example.demo.Service.TimeWorkService;
-
+@Service
 public class TimeWorkServiceImpl implements TimeWorkService{
 	@Autowired
 	private TimeWorkRepository timeWorkRepository;

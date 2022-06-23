@@ -1,5 +1,6 @@
 package com.example.demo.Service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,15 +35,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public UserDto userLogin(LoginDto input) {
-		if(this.userRepository.existsByUserName(input.getUserName())){
-			User user= this.userRepository.findAll().stream().map(i->i.getUserName().equals(input.getUserName())?i:null).findFirst().get();
-			 if(this.passwordEncoder.matches(input.getPassword(), user.getPassword())){
-				 return this.userMapper.getInstance().toDto(user);
-			 }else {
-				 return null;
-			 }
-		}
-		return null;
+		User user =this.userRepository.findAllByUserName(input.getUserName()).stream().findFirst().orElse(null);
+		return this.passwordEncoder.matches(input.getPassword(),user.getPassword())?this.userMapper.getInstance().toDto(user):null;
 	}
 
 	@Override
@@ -51,6 +45,7 @@ public class UserServiceImpl implements UserService{
 		user.setUserName(input.getUserName());
 		user.setPassword(this.passwordEncoder.encode(input.getPassword()));
 		user.setLevel(input.getLevel());
+		user.setCreateAt(LocalDateTime.now());
 		return this.userMapper.getInstance().toDto(this.userRepository.save(user));
 	}
 	
@@ -79,6 +74,7 @@ public class UserServiceImpl implements UserService{
 		user.setFullName(userDto.getFullName());
 		user.setSex(userDto.isSex());
 		user.setPhoneNumber(userDto.getPhoneNumber());
+		user.setUpdateAt(LocalDateTime.now());
 		return this.userMapper.getInstance().toDto(userRepository.save(user));
 	}
 
@@ -91,7 +87,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserDto findUserByUserName(String userName) {
-		return this.userMapper.getInstance().toDto(userRepository.findAll().stream().filter(i->(i.getUserName().equals(userName))).findFirst().get());
+		return this.userMapper.getInstance().toDto(userRepository.findAllByUserName(userName).get(0));
 	}
 
 	@Override

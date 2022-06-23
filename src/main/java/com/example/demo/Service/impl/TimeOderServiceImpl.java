@@ -1,9 +1,12 @@
 package com.example.demo.Service.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.MapperDto;
 import com.example.demo.Dto.TimeOderDto;
@@ -11,7 +14,7 @@ import com.example.demo.Entity.TimeOder;
 import com.example.demo.ModelMapper.TimeOderMapper;
 import com.example.demo.Repository.TimeOderRepository;
 import com.example.demo.Service.TimeOderService;
-
+@Service
 public class TimeOderServiceImpl implements TimeOderService{
 	@Autowired
 	private TimeOderRepository timeOderRepository;
@@ -34,8 +37,8 @@ public class TimeOderServiceImpl implements TimeOderService{
 	}
 
 	@Override
-	public TimeOderDto createTimeOder(TimeOder timeOder) {
-		return this.timeOderMapper.getInstance().toDto(this.timeOderRepository.save(timeOder));
+	public TimeOder createTimeOder(TimeOderDto timeOderDto) {
+		return this.timeOderRepository.save(this.timeOderMapper.getInstance().toEntity(timeOderDto));
 	}
 
 	@Override

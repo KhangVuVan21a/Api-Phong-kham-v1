@@ -3,6 +3,8 @@ package com.example.demo.ModelMapper;
 import org.modelmapper.ModelMapper;
 
 import com.example.demo.Dto.RegisterDto;
+import com.example.demo.Dto.UserAdminDto;
+import com.example.demo.Dto.UserDoctorDto;
 import com.example.demo.Dto.UserDto;
 import com.example.demo.Entity.User;
 public class UserMapper {
@@ -33,5 +35,13 @@ public class UserMapper {
 		ModelMapper modelMapper = new ModelMapper();
 		User user = modelMapper.map(registerDto,User.class);
 		return user;
+	}
+	public UserAdminDto toUserAdmin(User user) {
+		ModelMapper modelMapper =new ModelMapper();
+		return modelMapper.map(user, UserAdminDto.class);
+	}
+	public UserDoctorDto toUserDoctorDto(User user) {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(user, UserDoctorDto.class);
 	}
 }

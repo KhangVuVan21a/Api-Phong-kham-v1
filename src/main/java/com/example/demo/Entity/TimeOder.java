@@ -27,12 +27,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeOder {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="doctor_id")
 	private User doctor;
 	@Column(name="time_oder")

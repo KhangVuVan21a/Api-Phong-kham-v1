@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +22,9 @@ public class Department {
 	private String title;
 	@Column(name="detail",nullable = false)
 	private String detail;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "department")
+	@OneToMany(mappedBy = "department")
 	private List<User> doctor;
+	@OneToMany( mappedBy = "department")
+	private List<Heath> heath;
 	
 }

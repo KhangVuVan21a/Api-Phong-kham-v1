@@ -26,7 +26,7 @@ public class TimeWork {
 	private int id;
 	@Column(name="time",nullable = false)
 	private LocalDate time;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="doctor_id")
 	private User doctor;
 	

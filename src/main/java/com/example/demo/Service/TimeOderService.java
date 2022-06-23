@@ -11,6 +11,6 @@ public interface TimeOderService {
 	List<TimeOderDto> getAllTimeOder();
 	List<TimeOderDto> getAllTimeOderByIdUser(int idUser);
 	TimeOderDto getTimeOderById(int id);
-	TimeOderDto createTimeOder(TimeOder timeOder);
+	TimeOder createTimeOder(TimeOderDto timeOderDto);
 	TimeOderDto updateTimeOder(TimeOderDto timeOderDto);
 }

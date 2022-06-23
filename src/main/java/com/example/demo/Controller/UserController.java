@@ -49,4 +49,8 @@ public class UserController {
 	{
 		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.getAllUserByLevel(level));
 	}
+	@GetMapping("GetAllUserByName/{name}")
+	public BaseResponseDto<?> getAllUserByName(@PathVariable String name){
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.findUserByUserName(name));
+	}
 }

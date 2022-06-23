@@ -54,15 +54,15 @@ public class User {
 	private LocalDateTime updateAt;
 	@Column(name = "level")
 	private int level;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
 	private List<Heath> heath;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+	@OneToMany(mappedBy = "user")
 	private List<TimeOder> timeOdersUser;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "doctor")
+	@OneToMany(mappedBy = "doctor")
 	private List<TimeOder> timeOdersDoctor;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="department_id",insertable = false,updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="department_id")
 	private Department department;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+	@OneToMany( mappedBy = "doctor")
 	private List<TimeWork> timeWorks;
 }

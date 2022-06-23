@@ -41,12 +41,12 @@ public class Heath {
 	@JoinColumn(name="time_oder_id",referencedColumnName = "id")
 	private TimeOder timeOder;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="department_id")
+	@ManyToOne
+	@JoinColumn( name="department_id")
 	private Department department;
 	
 	@CreatedDate
