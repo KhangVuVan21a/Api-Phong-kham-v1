@@ -66,8 +66,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDto updateUser(UserDto userDto) {
-		User user=userRepository.findById(userDto.getId()).orElse(null);
+	public UserDto updateUser(UserDto userDto, int idUser) {
+		User user = userRepository.findById(idUser).get();
+		if(user==null)
+			return null;
 		user.setEmail(userDto.getEmail());
 		user.setAddress(userDto.getAddress());
 		user.setBirth(userDto.getBirth());

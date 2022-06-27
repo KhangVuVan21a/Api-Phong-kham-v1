@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public DepartmentDto getById(int id) {
-		return this.departmentMapper.getInstance().toDto(this.departmentRepository.findById(null).get());
+		return this.departmentMapper.getInstance().toDto(this.departmentRepository.findById(id).get());
 	}
 	@Override
 	public DepartmentDto createDepartment(DepartmentDto departmentDto) {

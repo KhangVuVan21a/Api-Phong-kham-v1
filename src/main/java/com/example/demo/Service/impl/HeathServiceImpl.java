@@ -74,7 +74,14 @@ public class HeathServiceImpl implements HeathService{
 		return  null;
 	}
 	@Override
-	public HeathDto updateHeath(HeathCreateDto heathCreateDto) {
+	public HeathDto updateHeath(HeathCreateDto heathCreateDto,int id) {
+		Heath heath= this.heathRepository.findById(id).get();
+		if(heath!=null) {
+			heath.setUpdateAt(LocalDate.now());
+			heath.setTitle(heathCreateDto.getTitle());
+			heath.setDetail(heathCreateDto.getDetail());
+			return this.heathMapper.getInstance().toDto(this.heathRepository.save(heath));
+		}
 		return null;
 	}
 

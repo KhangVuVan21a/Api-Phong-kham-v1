@@ -1,6 +1,9 @@
 package com.example.demo.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +23,8 @@ import com.example.demo.Service.impl.UserServiceImpl;
 import com.example.demo.Utils.Constants;
 
 @RestController
-@RequestMapping("User")
+@CrossOrigin("http://localhost:3000")
+@RequestMapping("/User")
 public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
@@ -29,15 +33,23 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public BaseResponseDto<?> registerUser(@RequestBody RegisterDto dto) {
-		return this.baseControll.getInstance().successResponse(Constants.REGISTER_SUCCESS, userServiceImpl.userRegister(dto));
+		UserDto userDto =this.userServiceImpl.userRegister(dto);
+		if(userDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.REGISTER_SUCCESS, userDto);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, null);
 	}
 	@PostMapping("/login")
 	public BaseResponseDto<?> loginUser(@RequestBody LoginDto dto) {
-		return this.baseControll.getInstance().successResponse(Constants.LOGIN_SUCCESS, userServiceImpl.userLogin(dto));
+		UserDto userDto = this.userServiceImpl.userLogin(dto);
+		if(userDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.LOGIN_SUCCESS, userServiceImpl.userLogin(dto));
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.SERVER_ERROR_CODE, Constants.LOGIN_ERROR);
 	}
-	@PutMapping("/update")
-	public BaseResponseDto<?> updateUser(@RequestBody UserDto dto) {
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.updateUser(dto));
+	@PutMapping("/update/{idUser}")
+	public BaseResponseDto<?> updateUser(@RequestBody UserDto dto,@PathVariable int idUser) {
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.updateUser(dto,idUser));
 	}
 	@GetMapping("/getall")
 	public BaseResponseDto<?> getAllUser()
@@ -51,6 +63,10 @@ public class UserController {
 	}
 	@GetMapping("GetAllUserByName/{name}")
 	public BaseResponseDto<?> getAllUserByName(@PathVariable String name){
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.findUserByUserName(name));
+		UserDto user = this.userServiceImpl.findUserByUserName(name);
+		if(user!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, user);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.SERVER_ERROR_MESSAGE);
 	}
 }

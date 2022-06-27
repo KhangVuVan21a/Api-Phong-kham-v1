@@ -1,6 +1,11 @@
 package com.example.demo.Controller;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +21,10 @@ import com.example.demo.Repository.TimeWorkRepository;
 import com.example.demo.Service.impl.TimeWorkServiceImpl;
 import com.example.demo.Utils.Constants;
 
+import net.bytebuddy.asm.Advice.This;
+
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/TimeWork")
 public class TimeWorkController {
 	@Autowired
@@ -44,7 +52,13 @@ public class TimeWorkController {
 	private BaseResponseDto<?> getAllTimeWorkByDoctorId(@PathVariable int idDoctor){
 		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeWorkServiceImpl.getAllTimeWorkByIdDoctor(idDoctor));
 	}
-	
-	//private BaseResponseDto<?> getAllTimeWorkByDate()
+	@GetMapping("/getTimeWorkByDateIdDoctor/{idDoctor}/{date}")
+	private BaseResponseDto<?> getAllTimeWorkByDateIddoctor(@PathVariable java.sql.Date date,@PathVariable int idDoctor){
+		List<TimeWorkDto> list= this.timeWorkServiceImpl.getTimeWorkByDate(date.toLocalDate(),idDoctor);
+		if(list!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, list);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.SERVER_ERROR_CODE,Constants.ERROR_MESSAGE);
+	}
 	
 }

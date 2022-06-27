@@ -13,7 +13,7 @@ public interface UserService {
 	UserDto userRegister(RegisterDto input);
 	boolean isCheckEmail(@Email String email);
 	boolean isCheckUserName(String userName);
-	UserDto updateUser(UserDto userDto);
+	UserDto updateUser(UserDto userDto, int idUser);
 	List<UserDto> getAllUser();
 	UserDto findUserByUserName(String userName);
 	List<UserDto> getAllUserByLevel(int level);

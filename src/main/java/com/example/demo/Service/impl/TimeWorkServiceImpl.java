@@ -55,10 +55,13 @@ public class TimeWorkServiceImpl implements TimeWorkService{
 		}
 		return null;
 	}
+
 	@Override
-	public TimeWorkDto getTimeWorkByDate(LocalDate date) {
-		return this.timeWorkMapper.getInstance().toDto(this.timeWorkRepository.findAll().stream().findFirst().map(i->i.getTime().toLocalDate()==date?i:null).get());
+	public List<TimeWorkDto> getTimeWorkByDate(LocalDate date, int idDoctor) {
+		return this.timeWorkRepository.findAll().stream().filter(i->(i.getDoctor().getId()==idDoctor&&i.getTime().getDayOfYear()==date.getDayOfYear())).map(i->this.timeWorkMapper.getInstance().toDto(i)).collect(Collectors.toList());
+
 	}
+
 
 
 

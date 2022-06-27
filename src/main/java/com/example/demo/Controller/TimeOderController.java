@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.example.demo.Dto.TimeOderDto;
 import com.example.demo.Service.impl.TimeOderServiceImpl;
 import com.example.demo.Utils.Constants;
 @RestController 
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/TimeOder")
 public class TimeOderController {
 	@Autowired
@@ -27,8 +29,12 @@ public class TimeOderController {
 	}
 	@PostMapping("/createTimeOder")
 	private BaseResponseDto<?> createTimeOder(@RequestBody TimeOderCreateDto timeOderCreateDto) {
+		TimeOderDto oderDto = this.timeOderServiceImpl.createTimeOder(timeOderCreateDto);
+		if(oderDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, oderDto);
+		}
 		//return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE,this.timeOderServiceImpl.createTimeOder(timeOderDto));
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeOderServiceImpl.createTimeOder(timeOderCreateDto));
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE,Constants.ERROR_MESSAGE);
 	}
 	@GetMapping("/getAllTimeOderByUserId/{id}")
 	private BaseResponseDto<?> getAllTimeOderByUserId(@PathVariable int id){
