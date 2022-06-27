@@ -1,5 +1,7 @@
 package com.example.demo.Dto;
 
+import javax.persistence.Column;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

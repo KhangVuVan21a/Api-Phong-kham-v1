@@ -9,16 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.MapperDto;
+import com.example.demo.Dto.TimeWorkCreateDto;
 import com.example.demo.Dto.TimeWorkDto;
 import com.example.demo.Entity.TimeWork;
 import com.example.demo.ModelMapper.TimeWorkMapper;
 import com.example.demo.Repository.TimeWorkRepository;
+import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.TimeWorkService;
 @Service
 public class TimeWorkServiceImpl implements TimeWorkService{
 	@Autowired
 	private TimeWorkRepository timeWorkRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
 //	@Autowired 
 //	private MapperDto mapperDto;
 	
@@ -34,8 +38,13 @@ public class TimeWorkServiceImpl implements TimeWorkService{
 	}
 
 	@Override
-	public TimeWorkDto createTimeWork(TimeWork timeWork) {
-		return this.timeWorkMapper.getInstance().toDto(this.timeWorkRepository.save(timeWork));
+	public TimeWorkDto createTimeWork(TimeWorkCreateDto timeWorkCreateDto,int idDoctor) {
+		TimeWork timeWork= this.timeWorkMapper.getInstance().toEntityCreate(timeWorkCreateDto);
+		if(this.userRepository.findById(idDoctor)!=null) {
+			timeWork.setDoctor(this.userRepository.findById(idDoctor).get());
+			return this.timeWorkMapper.getInstance().toDto(this.timeWorkRepository.save(timeWork));
+		}
+		return null;
 	}
 	@Override
 	public TimeWorkDto updateTimeWork(TimeWorkDto timeWorkDto) {
@@ -48,7 +57,7 @@ public class TimeWorkServiceImpl implements TimeWorkService{
 	}
 	@Override
 	public TimeWorkDto getTimeWorkByDate(LocalDate date) {
-		return this.timeWorkMapper.getInstance().toDto(this.timeWorkRepository.findAll().stream().findFirst().map(i->i.getTime()==date?i:null).get());
+		return this.timeWorkMapper.getInstance().toDto(this.timeWorkRepository.findAll().stream().findFirst().map(i->i.getTime().toLocalDate()==date?i:null).get());
 	}
 
 

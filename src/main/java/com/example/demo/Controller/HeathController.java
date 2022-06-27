@@ -21,9 +21,14 @@ public class HeathController {
 	private HeathServiceImpl heathServiceImpl;
 	
 	private BaseControll baseControll;
-	@PostMapping("")
-	public BaseResponseDto<?> createHeath(@RequestBody HeathCreateDto heathCreateDto){
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.heathServiceImpl.createHeath(heathCreateDto));
+	@PostMapping("/{timeOderId}/{userId}/{departmentId}")
+	public BaseResponseDto<?> createHeath(@RequestBody HeathCreateDto heathCreateDto,@PathVariable int timeOderId,@PathVariable int userId,@PathVariable int departmentId){
+		HeathDto heathDto= this.heathServiceImpl.createHeath(heathCreateDto,timeOderId,userId,departmentId);
+		if(heathDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_CODE,Constants.SUCCESS_MESSAGE,heathDto);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+		
 	}
 	@GetMapping("/GetAllHeath")
 	public BaseResponseDto<?> findAllHeath(){

@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,10 +23,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeWork {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(name="time",nullable = false)
-	private LocalDate time;
+	private LocalDateTime time;
 	@ManyToOne
 	@JoinColumn(name="doctor_id")
 	private User doctor;

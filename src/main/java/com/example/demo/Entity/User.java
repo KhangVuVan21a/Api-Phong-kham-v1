@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(name="username",nullable = false)
 	private String userName;
@@ -37,7 +38,7 @@ public class User {
 	@Column(name="full_name")
 	private String fullName;
 	@Column(name="birthday")
-	private Date birth;
+	private LocalDate birth;
 	@Column(name="sex")
 	private boolean sex;
 	@Column(name="email")

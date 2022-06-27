@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.MapperDto;
+import com.example.demo.Dto.TimeOderCreateDto;
 import com.example.demo.Dto.TimeOderDto;
 import com.example.demo.Entity.TimeOder;
 import com.example.demo.ModelMapper.TimeOderMapper;
@@ -37,8 +38,11 @@ public class TimeOderServiceImpl implements TimeOderService{
 	}
 
 	@Override
-	public TimeOder createTimeOder(TimeOderDto timeOderDto) {
-		return this.timeOderRepository.save(this.timeOderMapper.getInstance().toEntity(timeOderDto));
+	public TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto) {
+		TimeOder timeOder = this.timeOderMapper.getInstance().createtoEntity(timeOderCreateDto);
+		timeOder.setCreateAt(LocalDate.now());
+		return this.timeOderMapper.getInstance().toDto(this.timeOderRepository.save(timeOder));
+		//return this.timeOderRepository.save(this.timeOderMapper.getInstance().toEntity(timeOderDto));
 	}
 
 	@Override
@@ -46,6 +50,7 @@ public class TimeOderServiceImpl implements TimeOderService{
 		TimeOder timeOder = this.timeOderRepository.findById(timeOderDto.getId()).get();
 		TimeOder timeOderDtos=this.timeOderMapper.getInstance().toEntity(timeOderDto);
 		timeOderDtos.setCreateAt(timeOder.getCreateAt());
+		timeOderDtos.setUpdateAt(LocalDate.now());
 		timeOderRepository.save(timeOderDtos);
 		return this.timeOderMapper.getInstance().toDto(timeOderDtos);
 	}

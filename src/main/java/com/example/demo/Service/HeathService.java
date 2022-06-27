@@ -12,7 +12,7 @@ public interface HeathService {
 	List<HeathDto> getallHeath();
 	HeathDto getHeathById(int id);
 	List<HeathDto> getAllHeathByIdUser(int idUser);
-	HeathDto createHeath(HeathCreateDto heathCreateDto);
+	HeathDto createHeath(HeathCreateDto heathCreateDto,int timeOderId, int userId,int departmentId);
 	HeathDto updateHeath(HeathCreateDto heathCreateDto);
 	
 }

@@ -1,14 +1,10 @@
 package com.example.demo.Dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import com.example.demo.Entity.User;
 
 import lombok.Data;
 @Data
-public class TimeWorkDto {
-	private int id;
+public class TimeWorkCreateDto {
 	private LocalDateTime time;
-	private UserDoctorDto doctor;
-	
 }

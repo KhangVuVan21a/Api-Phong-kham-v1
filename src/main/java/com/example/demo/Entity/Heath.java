@@ -28,7 +28,7 @@ import net.bytebuddy.utility.nullability.MaybeNull;
 @NoArgsConstructor
 public class Heath {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@Column(name="title",nullable = false)
@@ -37,11 +37,11 @@ public class Heath {
 	@Column(name="detail",nullable = false)
 	private String detail;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="time_oder_id",referencedColumnName = "id")
 	private TimeOder timeOder;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private User user;
 	
