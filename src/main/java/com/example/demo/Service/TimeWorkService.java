@@ -14,6 +14,6 @@ public interface TimeWorkService {
 	List<TimeWorkDto> getAllTimeWork();
 	List<TimeWorkDto> getAllTimeWorkByIdDoctor(int idDoctor);
 	TimeWorkDto createTimeWork(TimeWorkCreateDto timeWorkCreateDto,int idDoctor);
-	TimeWorkDto updateTimeWork(TimeWorkDto timeWorkDto);
+	TimeWorkDto updateTimeWork(TimeWorkCreateDto timeWorkCreateDto,int id);
 	List<TimeWorkDto> getTimeWorkByDate(LocalDate date,int idDoctor);
 }

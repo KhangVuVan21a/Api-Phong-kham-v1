@@ -47,11 +47,11 @@ public class TimeWorkServiceImpl implements TimeWorkService{
 		return null;
 	}
 	@Override
-	public TimeWorkDto updateTimeWork(TimeWorkDto timeWorkDto) {
-		TimeWork timeWork=this.timeWorkRepository.findById(timeWorkDto.getId()).get();
+	public TimeWorkDto updateTimeWork(TimeWorkCreateDto timeWorkCreateDto,int id) {
+		TimeWork timeWork=this.timeWorkRepository.findById(id).get();
 		if(timeWork!=null) {
-			TimeWork work=this.timeWorkMapper.getInstance().toEntity(timeWorkDto);
-			return timeWorkDto;
+			timeWork.setTime(timeWorkCreateDto.getTime());
+			return this.timeWorkMapper.getInstance().toDto(timeWork);
 		}
 		return null;
 	}

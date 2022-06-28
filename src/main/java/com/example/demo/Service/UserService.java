@@ -17,5 +17,6 @@ public interface UserService {
 	List<UserDto> getAllUser();
 	UserDto findUserByUserName(String userName);
 	List<UserDto> getAllUserByLevel(int level);
+	UserDto getUserById(int id);
 	
 }

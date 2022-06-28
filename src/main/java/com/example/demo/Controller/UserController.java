@@ -69,4 +69,12 @@ public class UserController {
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.SERVER_ERROR_MESSAGE);
 	}
+	@GetMapping("/getUserById/{id}")
+	private BaseResponseDto<?> getUserById(@PathVariable int id){
+		UserDto userDto=this.userServiceImpl.getUserById(id);
+		if(userDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE,userDto);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}
 }

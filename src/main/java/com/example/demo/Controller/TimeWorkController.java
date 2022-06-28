@@ -40,9 +40,9 @@ public class TimeWorkController {
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE,"Not Created!");	
 	}
-	@PutMapping("/update")
-	private BaseResponseDto<?> updateTimeWork(@RequestBody TimeWorkDto timeWorkDto){
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeWorkServiceImpl.updateTimeWork(timeWorkDto));
+	@PutMapping("/update/{id}")
+	private BaseResponseDto<?> updateTimeWork(@RequestBody TimeWorkCreateDto timeWorkCreateDto,@PathVariable int id){
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeWorkServiceImpl.updateTimeWork(timeWorkCreateDto,id));
 	}
 	@GetMapping("/getAll")
 	private BaseResponseDto<?> getAllTimeWork(){

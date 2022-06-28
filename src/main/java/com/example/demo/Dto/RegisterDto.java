@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class RegisterDto extends LoginDto {
 	@Email
-	@NotEmpty(message = "Email not empty!")
+	//@NotEmpty(message = "Email not empty!")
 	private String email;
 	@NotEmpty(message = "level not empty!")
 	private int level;

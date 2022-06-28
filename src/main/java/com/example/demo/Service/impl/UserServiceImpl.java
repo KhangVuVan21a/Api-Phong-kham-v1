@@ -97,4 +97,10 @@ public class UserServiceImpl implements UserService{
 		return this.getAllUser().stream().filter(i->i.getLevel()==level).collect(Collectors.toList());
 	}
 
+	@Override
+	public UserDto getUserById(int id) {
+		 UserDto userDto= this.userMapper.getInstance().toDto(this.userRepository.findById(id).get());
+		 return userDto==null?null:userDto;
+	}
+
 }
