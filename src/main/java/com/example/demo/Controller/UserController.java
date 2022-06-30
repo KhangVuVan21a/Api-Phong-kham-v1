@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Dto.BaseResponseDto;
 import com.example.demo.Dto.LoginDto;
 import com.example.demo.Dto.RegisterDto;
+import com.example.demo.Dto.UserDoctorDto;
 import com.example.demo.Dto.UserDto;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.impl.UserServiceImpl;
@@ -74,6 +75,14 @@ public class UserController {
 		UserDto userDto=this.userServiceImpl.getUserById(id);
 		if(userDto!=null) {
 			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE,userDto);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}
+	@GetMapping("/getDoctorById/{id}")
+	private BaseResponseDto<?> getDoctorById(@PathVariable int id){
+		UserDoctorDto userDoctorDto=this.userServiceImpl.getDoctorById(id);
+		if(userDoctorDto!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE,userDoctorDto);
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
 	}

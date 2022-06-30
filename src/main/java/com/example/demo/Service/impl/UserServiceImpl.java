@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.LoginDto;
 import com.example.demo.Dto.RegisterDto;
+import com.example.demo.Dto.UserDoctorDto;
 import com.example.demo.Dto.UserDto;
 import com.example.demo.Dto.UserJwtDto;
 import com.example.demo.Entity.User;
@@ -165,6 +166,12 @@ public class UserServiceImpl implements UserService {
 	public UserDto getUserById(int id) {
 		UserDto userDto = this.userMapper.getInstance().toDto(this.userRepository.findById(id).get());
 		return userDto == null ? null : userDto;
+	}
+
+	@Override
+	public UserDoctorDto getDoctorById(int id) {
+		UserDoctorDto userDoctorDto = this.userMapper.getInstance().toUserDoctorDto(this.userRepository.findById(id).get());
+		return userDoctorDto == null ? null : userDoctorDto;
 	}
 
 }

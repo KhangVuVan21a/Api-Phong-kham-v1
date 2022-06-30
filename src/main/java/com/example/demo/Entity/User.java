@@ -61,7 +61,7 @@ public class User {
 	private List<TimeOder> timeOdersUser;
 	@OneToMany(mappedBy = "doctor")
 	private List<TimeOder> timeOdersDoctor;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="department_id")
 	private Department department;
 	@OneToMany( mappedBy = "doctor")

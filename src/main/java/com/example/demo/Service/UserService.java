@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.LoginDto;
 import com.example.demo.Dto.RegisterDto;
+import com.example.demo.Dto.UserDoctorDto;
 import com.example.demo.Dto.UserDto;
 import com.example.demo.Dto.UserJwtDto;
 @Service
@@ -23,5 +24,6 @@ public interface UserService {
 	UserDto getUserById(int id);
 	UserJwtDto userLogin1(LoginDto input);
 	UserJwtDto userRegister1(RegisterDto input);
+	UserDoctorDto getDoctorById(int id);
 	
 }

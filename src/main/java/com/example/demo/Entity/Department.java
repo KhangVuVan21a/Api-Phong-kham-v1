@@ -23,9 +23,9 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name="title")
+	@Column(name="title",columnDefinition="VARCHAR(255) COLLATE utf8_unicode_ci")
 	private String title;
-	@Column(name="detail")
+	@Column(name="detail" ,columnDefinition="VARCHAR(255) COLLATE utf8_unicode_ci")
 	private String detail;
 	@OneToMany(mappedBy = "department")
 	private List<User> doctor;
