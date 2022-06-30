@@ -4,6 +4,10 @@ public class Constants {
 	public static final String ROLE_CUSTOMER = "Customer";
 
     public static final String ROLE_ADMIN = "Admin";
+    
+    public static final String ROLE_DOCTOR = "Doctor";
+    
+    public static final String ROLE_USER = "User";
 
     public static final String ROLE_SUPPER_ADMIN = "Supper-Admin";
 

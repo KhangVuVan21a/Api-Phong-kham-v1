@@ -66,4 +66,9 @@ public class User {
 	private Department department;
 	@OneToMany( mappedBy = "doctor")
 	private List<TimeWork> timeWorks;
+	@Column(name="role")
+	private int role;
+	@ManyToOne
+	@JoinColumn(name="role",insertable = false,updatable = false)
+	private Role roleUser;
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 public class UserDto {
 	private int id;
 	private String username;
-	private String password;
+	//private String password;
 	private String fullName;
 	private LocalDate birth;
 	private boolean sex;
