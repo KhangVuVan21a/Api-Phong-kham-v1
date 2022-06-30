@@ -25,5 +25,6 @@ public interface UserService {
 	UserJwtDto userLogin1(LoginDto input);
 	UserJwtDto userRegister1(RegisterDto input);
 	UserDoctorDto getDoctorById(int id);
+	List<UserDoctorDto> getAllUserDoctor();
 	
 }

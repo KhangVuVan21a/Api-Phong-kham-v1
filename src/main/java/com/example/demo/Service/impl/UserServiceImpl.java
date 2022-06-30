@@ -174,4 +174,10 @@ public class UserServiceImpl implements UserService {
 		return userDoctorDto == null ? null : userDoctorDto;
 	}
 
+	@Override
+	public List<UserDoctorDto> getAllUserDoctor() {
+		return this.userRepository.findAll().stream().filter(i -> i.getLevel() == 2).map(i->this.userMapper.getInstance().toUserDoctorDto(i)).collect(Collectors.toList());
+	}
+	
+
 }

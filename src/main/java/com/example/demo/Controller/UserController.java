@@ -86,4 +86,9 @@ public class UserController {
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
 	}
+	@GetMapping("/GetAllDoctor")
+	public BaseResponseDto<?> getAllDoctor()
+	{
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.getAllUserDoctor());
+	}
 }
