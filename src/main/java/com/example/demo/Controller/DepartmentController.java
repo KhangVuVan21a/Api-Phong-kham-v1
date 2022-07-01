@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,4 +42,11 @@ public class DepartmentController {
 	private BaseResponseDto<?> getById(@PathVariable int id){
 		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.departmentServiceImpl.getById(id));
 	}
+	@PutMapping("/update")
+	private BaseResponseDto<?> update(@RequestBody DepartmentDto departmentDto){
+		DepartmentDto dto=this.departmentServiceImpl.updateDepartment(departmentDto);
+		if(dto!=null)
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, dto);
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}	
 }

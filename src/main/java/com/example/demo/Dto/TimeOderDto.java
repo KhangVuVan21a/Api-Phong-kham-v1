@@ -1,6 +1,6 @@
 package com.example.demo.Dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.example.demo.Entity.Heath;
 import com.example.demo.Entity.User;
@@ -16,7 +16,7 @@ public class TimeOderDto {
 	private int id;
 	private UserDto user;
 	private UserDto doctor;
-	private LocalDate time;
+	private LocalDateTime time;
 	private String symptom;
 	private HeathDto heath;
 }

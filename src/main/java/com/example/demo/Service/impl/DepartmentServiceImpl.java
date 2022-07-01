@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.DepartmentDto;
+import com.example.demo.Entity.Department;
 import com.example.demo.ModelMapper.DepartmentMapper;
 import com.example.demo.Repository.DepartmentRepository;
 import com.example.demo.Service.DepartmentService;
@@ -31,5 +32,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 		// TODO Auto-generated method stub
 		return this.departmentMapper.getInstance().toDto(this.departmentRepository.save(this.departmentMapper.getInstance().toEntity(departmentDto)));
 	}
+
+	@Override
+	public DepartmentDto updateDepartment(DepartmentDto departmentDto) {
+		Department department=this.departmentRepository.findById(departmentDto.getId()).get();
+		if(department==null)
+			return null;
+		department.setDetail(departmentDto.getDetail());
+		department.setTitle(departmentDto.getTitle());
+		return this.departmentMapper.getInstance().toDto(this.departmentRepository.save(department));
+	}
+	
 
 }
