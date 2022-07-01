@@ -43,16 +43,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
+	        http.cors();
 	        // Disable CSRF (cross site request forgery)
 	        http.csrf().disable();
-
+	        
 	        // No session will be created or used by spring security
 //	        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	        // Entry points
 	        http.authorizeRequests()
 	            .antMatchers("/public/**").permitAll()
-
 	            .antMatchers("/api/auth/login", "/api/auth/register", "/index", "/swagger-ui.html" ).permitAll();
 
 	        // error page
