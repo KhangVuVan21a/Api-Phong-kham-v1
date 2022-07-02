@@ -91,4 +91,11 @@ public class UserController {
 	{
 		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.userServiceImpl.getAllUserDoctor());
 	}
+	@GetMapping("/GetAllUserByRole/{role}")
+	private BaseResponseDto<?> getAllUserByRole(@PathVariable String role){
+		List<UserDto> list =this.userServiceImpl.getAllUserByRole(role);
+		if(list!=null)
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, list);
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}
 }

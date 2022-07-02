@@ -23,8 +23,10 @@ import com.example.demo.Dto.RegisterDto;
 import com.example.demo.Dto.UserDoctorDto;
 import com.example.demo.Dto.UserDto;
 import com.example.demo.Dto.UserJwtDto;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
 import com.example.demo.ModelMapper.UserMapper;
+import com.example.demo.Repository.RoleRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
@@ -57,6 +59,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDetailsService userdetailsService;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 
 	@Override
@@ -177,6 +182,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDoctorDto> getAllUserDoctor() {
 		return this.userRepository.findAll().stream().filter(i -> i.getLevel() == 2).map(i->this.userMapper.getInstance().toUserDoctorDto(i)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<UserDto> getAllUserByRole(String name) {
+		Role role = this.roleRepository.findRoleByName(name);
+		if(role == null) {
+			return null;
+		}
+		return this.userRepository.findAllUserByRole(role.getId()).stream().map(i->this.userMapper.getInstance().toDto(i)).collect(Collectors.toList());
 	}
 	
 

@@ -26,5 +26,6 @@ public interface UserService {
 	UserJwtDto userRegister1(RegisterDto input);
 	UserDoctorDto getDoctorById(int id);
 	List<UserDoctorDto> getAllUserDoctor();
+	List<UserDto> getAllUserByRole(String name);
 	
 }

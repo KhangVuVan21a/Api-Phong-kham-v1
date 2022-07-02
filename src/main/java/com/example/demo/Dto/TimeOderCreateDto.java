@@ -1,6 +1,6 @@
 package com.example.demo.Dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.Getter;
@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TimeOderCreateDto {
-	private LocalDate time;
+	private LocalDateTime time;
 	private String symptom;
 }

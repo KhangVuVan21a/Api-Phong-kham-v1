@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Dto.TimeOderCreateDto;
 import com.example.demo.Dto.TimeOderDto;
 import com.example.demo.Entity.TimeOder;
+import com.example.demo.Entity.User;
 @Service
 public interface TimeOderService {
 	List<TimeOderDto> getAllTimeOder();
 	List<TimeOderDto> getAllTimeOderByIdUser(int idUser);
 	TimeOderDto getTimeOderById(int id);
-	TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto);
+	TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto,User user ,User doctor);
 	TimeOderDto updateTimeOder(TimeOderDto timeOderDto);
 }

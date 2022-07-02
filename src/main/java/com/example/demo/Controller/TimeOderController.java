@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Dto.BaseResponseDto;
 import com.example.demo.Dto.TimeOderCreateDto;
 import com.example.demo.Dto.TimeOderDto;
+import com.example.demo.Entity.User;
+import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.impl.TimeOderServiceImpl;
 import com.example.demo.Utils.Constants;
 @RestController 
@@ -22,14 +24,25 @@ public class TimeOderController {
 	@Autowired
 	private TimeOderServiceImpl timeOderServiceImpl;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	private BaseControll baseControll;
 	@GetMapping("/FindAll")
 	private BaseResponseDto<?> findAllTimeOder(){
 		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeOderServiceImpl.getAllTimeOder());
 	}
-	@PostMapping("/createTimeOder")
-	private BaseResponseDto<?> createTimeOder(@RequestBody TimeOderCreateDto timeOderCreateDto) {
-		TimeOderDto oderDto = this.timeOderServiceImpl.createTimeOder(timeOderCreateDto);
+	@PostMapping("/createTimeOder/{idUser}/{idDoctor}")
+	private BaseResponseDto<?> createTimeOder(@RequestBody TimeOderCreateDto timeOderCreateDto,@PathVariable int idUser ,@PathVariable int idDoctor) {
+		User user=this.userRepository.findById(idUser).orElse(null);
+		User doctor=this.userRepository.findById(idDoctor).orElse(null);
+		if(user == null) {
+			return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE,"user not found!");
+		}
+		if(doctor == null) {
+			return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE,"doctor not found!");
+		}
+		TimeOderDto oderDto = this.timeOderServiceImpl.createTimeOder(timeOderCreateDto,user,doctor);
 		if(oderDto!=null) {
 			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, oderDto);
 		}

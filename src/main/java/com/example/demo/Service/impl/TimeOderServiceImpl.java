@@ -12,6 +12,7 @@ import com.example.demo.Dto.MapperDto;
 import com.example.demo.Dto.TimeOderCreateDto;
 import com.example.demo.Dto.TimeOderDto;
 import com.example.demo.Entity.TimeOder;
+import com.example.demo.Entity.User;
 import com.example.demo.ModelMapper.TimeOderMapper;
 import com.example.demo.Repository.TimeOderRepository;
 import com.example.demo.Service.TimeOderService;
@@ -38,8 +39,10 @@ public class TimeOderServiceImpl implements TimeOderService{
 	}
 
 	@Override
-	public TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto) {
+	public TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto, User user ,User doctor) {
 		TimeOder timeOder = this.timeOderMapper.getInstance().createtoEntity(timeOderCreateDto);
+		timeOder.setUser(user);
+		timeOder.setDoctor(doctor);
 		timeOder.setCreateAt(LocalDate.now());
 		return this.timeOderMapper.getInstance().toDto(this.timeOderRepository.save(timeOder));
 		//return this.timeOderRepository.save(this.timeOderMapper.getInstance().toEntity(timeOderDto));
