@@ -27,6 +27,7 @@ public class TimeOderController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	private BaseControll baseControll;
 	@GetMapping("/FindAll")
 	private BaseResponseDto<?> findAllTimeOder(){
@@ -49,9 +50,19 @@ public class TimeOderController {
 		//return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE,this.timeOderServiceImpl.createTimeOder(timeOderDto));
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE,Constants.ERROR_MESSAGE);
 	}
-	@GetMapping("/getAllTimeOderByUserId/{id}")
-	private BaseResponseDto<?> getAllTimeOderByUserId(@PathVariable int id){
-		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeOderServiceImpl.getAllTimeOderByIdUser(id));
+	@GetMapping("/getAllTimeOderByUserId/{idUser}")
+	private BaseResponseDto<?> getAllTimeOderByUserId(@PathVariable int idUser){
+		User user =this.userRepository.findById(idUser).get();
+		if(user ==null)
+			return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, "User not found!");
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeOderServiceImpl.getAllTimeOderByUser(user));
+	}
+	@GetMapping("/getAllTimeOderByDoctorId/{idDoctor}")
+	private BaseResponseDto<?> getAllTimeOderByDoctorId(@PathVariable int idDoctor){
+		User doctor =this.userRepository.findById(idDoctor).get();
+		if(doctor ==null)
+			return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, "Doctor not found!");
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.timeOderServiceImpl.getAllTimeOderByDoctor(doctor));
 	}
 	@PutMapping("/Update")
 	private BaseResponseDto<?> updateTimeOder(@RequestBody TimeOderDto timeOderDto){

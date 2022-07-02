@@ -11,7 +11,8 @@ import com.example.demo.Entity.User;
 @Service
 public interface TimeOderService {
 	List<TimeOderDto> getAllTimeOder();
-	List<TimeOderDto> getAllTimeOderByIdUser(int idUser);
+	List<TimeOderDto> getAllTimeOderByUser(User user);
+	List<TimeOderDto> getAllTimeOderByDoctor(User doctor);
 	TimeOderDto getTimeOderById(int id);
 	TimeOderDto createTimeOder(TimeOderCreateDto timeOderCreateDto,User user ,User doctor);
 	TimeOderDto updateTimeOder(TimeOderDto timeOderDto);

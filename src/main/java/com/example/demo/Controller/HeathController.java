@@ -23,6 +23,7 @@ public class HeathController {
 	@Autowired 
 	private HeathServiceImpl heathServiceImpl;
 	
+	
 	private BaseControll baseControll;
 	@PostMapping("/{timeOderId}/{userId}/{departmentId}")
 	public BaseResponseDto<?> createHeath(@RequestBody HeathCreateDto heathCreateDto,@PathVariable int timeOderId,@PathVariable int userId,@PathVariable int departmentId){
@@ -31,7 +32,6 @@ public class HeathController {
 			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_CODE,Constants.SUCCESS_MESSAGE,heathDto);
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
-		
 	}
 	@GetMapping("/GetAllHeath")
 	public BaseResponseDto<?> findAllHeath(){
@@ -48,5 +48,9 @@ public class HeathController {
 			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, heathDto);
 		}
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}
+	@GetMapping("/getAllHeathByIdUser/{idUser}")
+	private BaseResponseDto<?> getAllHeathByIdUser(@PathVariable int idUser){
+		return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, this.heathServiceImpl.getAllHeathByIdUser(idUser));
 	}
 }

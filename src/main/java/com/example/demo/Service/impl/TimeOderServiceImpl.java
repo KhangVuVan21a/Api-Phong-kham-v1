@@ -29,8 +29,8 @@ public class TimeOderServiceImpl implements TimeOderService{
 	}
 
 	@Override
-	public List<TimeOderDto> getAllTimeOderByIdUser(int idUser) {
-		return this.timeOderRepository.findAll().stream().map(i->(i.getUser().getId()==idUser?this.timeOderMapper.toDto(i):null)).collect(Collectors.toList());
+	public List<TimeOderDto> getAllTimeOderByUser(User user) {
+		return this.timeOderRepository.findAllTimeOderByUser(user).stream().map(i->this.timeOderMapper.getInstance().toDto(i)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class TimeOderServiceImpl implements TimeOderService{
 		return this.timeOderMapper.getInstance().toDto(this.timeOderRepository.save(timeOder));
 		//return this.timeOderRepository.save(this.timeOderMapper.getInstance().toEntity(timeOderDto));
 	}
-
+	
 	@Override
 	public TimeOderDto updateTimeOder(TimeOderDto timeOderDto) {
 		TimeOder timeOder = this.timeOderRepository.findById(timeOderDto.getId()).get();
@@ -56,6 +56,11 @@ public class TimeOderServiceImpl implements TimeOderService{
 		timeOderDtos.setUpdateAt(LocalDate.now());
 		timeOderRepository.save(timeOderDtos);
 		return this.timeOderMapper.getInstance().toDto(timeOderDtos);
+	}
+
+	@Override
+	public List<TimeOderDto> getAllTimeOderByDoctor(User doctor) {
+		return this.timeOderRepository.findAllTimeOderByDoctor(doctor).stream().map(i->this.timeOderMapper.getInstance().toDto(i)).collect(Collectors.toList());
 	}
 
 }
