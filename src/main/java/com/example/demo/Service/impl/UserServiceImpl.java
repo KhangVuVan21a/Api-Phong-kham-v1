@@ -79,10 +79,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserJwtDto userRegister1(RegisterDto input) {
-		int roleCustomerId = this.roleService.getRoleIdByName(Constants.ROLE_USER);
+		
+		//int roleCustomerId = this.roleService.getRoleIdByName(null)
 
 		User user = this.userMapper.getInstance().registertoEntity(input);
-		user.setRole(roleCustomerId);
+		user.setRole(input.getLevel());
 		user.setPassword(this.passwordEncoder.encode(input.getPassword()));
 		user.setCreateAt(LocalDateTime.now());
 		user.setUpdateAt(LocalDateTime.now());
@@ -191,6 +192,13 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		return this.userRepository.findAllUserByRole(role.getId()).stream().map(i->this.userMapper.getInstance().toDto(i)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<UserDoctorDto> findDoctorLikeName(String name) {
+		List<UserDoctorDto> list= this.userRepository.findAllDoctor(name).stream().map(i->this.userMapper.getInstance().toUserDoctorDto(i)).collect(Collectors.toList());
+		System.out.println(list);
+		return list.size()>0?list:null;
 	}
 	
 

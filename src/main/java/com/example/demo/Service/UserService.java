@@ -27,5 +27,6 @@ public interface UserService {
 	UserDoctorDto getDoctorById(int id);
 	List<UserDoctorDto> getAllUserDoctor();
 	List<UserDto> getAllUserByRole(String name);
+	List<UserDoctorDto> findDoctorLikeName(String name);
 	
 }

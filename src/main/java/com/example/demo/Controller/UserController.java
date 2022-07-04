@@ -98,4 +98,12 @@ public class UserController {
 			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, list);
 		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
 	}
+	@GetMapping("/findDoctorLikeName/{name}")
+	private BaseResponseDto<?> findDoctorLikeName(@PathVariable String name){
+		List<UserDoctorDto> list =this.userServiceImpl.findDoctorLikeName(name);
+		if(list!=null) {
+			return this.baseControll.getInstance().successResponse(Constants.SUCCESS_MESSAGE, list);
+		}
+		return this.baseControll.getInstance().errorResponse(Constants.ERROR_CODE, Constants.ERROR_MESSAGE);
+	}
 }

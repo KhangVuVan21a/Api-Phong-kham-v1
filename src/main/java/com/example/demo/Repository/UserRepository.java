@@ -1,7 +1,7 @@
 package com.example.demo.Repository;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> findAllByLevel(int level);
 	User findUserByUserName(String userName);
 	List<User> findAllUserByRole(int role);
-//	@Query("SELECT u FROM User WHERE u.userName = ?1")
-//	User findUserByName(String userName);
+	@Query(value="SELECT * FROM user u where full_name like %?1% and role =2", nativeQuery = true)
+	List<User> findAllDoctor(String name);
 }
